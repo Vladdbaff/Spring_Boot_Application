@@ -25,38 +25,24 @@ public class AdminController {
     private RoleService roleService;
 
     @GetMapping()
-    //@ResponseBody
     public String mainPage(Model model){
         model.addAttribute("users", userService.getAllUsers());
         return "main";
     }
 
     @GetMapping("/new")
-    public String newUser(Model model) {
-        String roleAdmin = null;
-        model.addAttribute("user", new User());
-
-        model.addAttribute("roleAdmin", roleAdmin);
+    public String newUser(@ModelAttribute("user") User user){
         return "newUser";
     }
 
     @PostMapping
-    public String createUser(
-            @ModelAttribute(value = "roleAdmin") String roleAdmin,
-            @ModelAttribute("user") @Valid User user, BindingResult result) {
-
-        if (result.hasErrors()) {
+    public String create(@ModelAttribute("user") @Valid User user, BindingResult result,
+                         @RequestParam(name = "listRoles", required = false) String[] roles) {
+        if(result.hasErrors()) {
             return "newUser";
         }
 
-        Set<Role> setRole = new HashSet<>();
-        if (roleAdmin.contains("on")) {
-            setRole.add(roleService.getRoleById(1));
-            setRole.add(roleService.getRoleById(2));
-        } else {
-            setRole.add(roleService.getRoleById(2));
-        }
-        user.setRoles(setRole);
+        user.setRoles(roleService.getRoleByName(roles));
         userService.saveUser(user);
         return "redirect:/admin";
     }

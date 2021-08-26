@@ -14,10 +14,15 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService{
 
-    @Autowired
-    private UserDao userDao;
-    @Autowired
-    private RoleService roleService;
+
+    final private UserDao userDao;
+
+    final private RoleService roleService;
+
+    public UserServiceImpl(UserDao userDao, RoleService roleService) {
+        this.userDao = userDao;
+        this.roleService =roleService;
+    }
 
 
     @Override

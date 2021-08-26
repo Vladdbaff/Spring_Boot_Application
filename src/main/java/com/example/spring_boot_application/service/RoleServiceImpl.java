@@ -11,8 +11,12 @@ import java.util.Set;
 @Service
 public class RoleServiceImpl implements RoleService{
 
-    @Autowired
-    private RoleDao roleDao;
+
+    final private RoleDao roleDao;
+
+    public RoleServiceImpl(RoleDao roleDao) {
+        this.roleDao = roleDao;
+    }
 
     @Override
     public Role getRoleById(long id) {

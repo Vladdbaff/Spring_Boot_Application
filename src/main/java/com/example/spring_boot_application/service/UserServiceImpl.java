@@ -15,9 +15,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
 
-    final private UserDao userDao;
+    private final UserDao userDao;
 
-    final private RoleService roleService;
+    private final RoleService roleService;
 
     public UserServiceImpl(UserDao userDao, RoleService roleService) {
         this.userDao = userDao;

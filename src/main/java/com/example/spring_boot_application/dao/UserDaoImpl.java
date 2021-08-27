@@ -18,7 +18,7 @@ public class UserDaoImpl implements UserDao {
     private EntityManager entityManager;
 
 
-    private RoleDao roleDao;
+    private final RoleDao roleDao;
 
     public UserDaoImpl(RoleDao roleDao) {
         this.roleDao = roleDao;

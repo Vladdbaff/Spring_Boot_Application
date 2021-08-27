@@ -20,9 +20,9 @@ import java.util.Set;
 public class AdminController {
 
 
-    final private UserService userService;
+    private final UserService userService;
 
-    final private RoleService roleService;
+    private final RoleService roleService;
 
     public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
